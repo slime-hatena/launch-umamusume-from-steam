@@ -3,7 +3,8 @@
 # dmmgames launcherは管理者権限で動くので昇格させる
 If (-NOT ([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")) {
     # steamがゲーム起動中の判定に使うためwaitしておく
-    Start-Process powershell -WindowStyle hidden -Wait -Verb runAs -ArgumentList $myinvocation.mycommand.definition;
+    $arg = "-ExecutionPolicy Bypass `"& '" + $myinvocation.mycommand.definition + "' ; pause;`"";
+    Start-Process powershell -Wait -Verb runAs -ArgumentList $arg;
     exit;
 }
 
