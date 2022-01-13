@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Setting generator - slime-hatena/launch-umamusume-from-steam</title>
+  <style>
+    body {
+      margin: .8em
+    }
+
+    input,
+    textarea {
+      font-family: monospace;
+      max-width: 620px;
+      width: calc(100vw - 3em);
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Setting generator</h1>
+  <a href="https://github.com/slime-hatena/launch-umamusume-from-steam/">readme</a>
+  <p>
+    ウマ娘をインストールしたディレクトリ:<br>
+    &nbsp;<input type="text" id="umamusume_directory" placeholder="入力してください...">
+  </p>
+  <p>
+    スクリプトを保存したディレクトリ:<br>
+    &nbsp;<input type="text" id="script_directory" placeholder="入力してください...">
+  </p>
+
+  <hr>
+
+  <p>
+    タイトル:<br>
+    &nbsp;<textarea readonly rows="3">ウマ娘 プリティーダービー</textarea>
+  </p>
+
+  <p>
+    リンク先:<br>
+    &nbsp;<textarea readonly rows="3">"C:\WINDOWS\System32\WindowsPowerShell\v1.0\powershell.exe"</textarea>
+  </p>
+  <p>
+    作業フォルダー:<br>
+    &nbsp;<textarea readonly id="word_dir" rows="3">"..."</textarea>
+  </p>
+  <p>
+    起動オプション:<br>
+    &nbsp;<textarea readonly id="options"
+      rows="3">-windowstyle hidden -NoProfile -ExecutionPolicy Bypass -Command "& &#92;"...&#92;bin&#92;start.ps1&#92;""</textarea>
+  </p>
+
+  <script>
+    const umamusumeDirectory = document.getElementById("umamusume_directory");
+    const workDirTextArea = document.getElementById("word_dir");
+    umamusumeDirectory.onchange = () => {
+      workDirTextArea.value = `"${umamusumeDirectory.value}"`;
+    };
+
+    const scriptDirectory = document.getElementById("script_directory");
+    const optionsTextArea = document.getElementById("options");
+    scriptDirectory.onchange = () => {
+      optionsTextArea.value = `-windowstyle hidden -NoProfile -ExecutionPolicy Bypass -Command "& \\"${scriptDirectory.value}\\bin\\start.ps1\\""`;
+    };
+  </script>
+</body>
+
+</html>
